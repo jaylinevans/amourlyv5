@@ -1003,6 +1003,9 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
 .venue-filter-row{display:flex;gap:8px;padding:12px var(--px) 0;overflow-x:auto;}
 .venue-filter-row::-webkit-scrollbar{display:none;}
 .search-wrap{position:relative;margin:10px var(--px) 0;}
+.home-search{position:relative;}
+.home-search .search-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);z-index:1;pointer-events:none;}
+.home-search .search-inp{width:100%;}
 .search-inp{width:100%;padding:11px 14px 11px 40px;background:var(--white);
   border:1.5px solid var(--bdr);border-radius:var(--r-pill);font-size:14px;
   font-family:var(--font-ui);color:var(--ink);outline:none;
@@ -1010,11 +1013,18 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
 .search-inp:focus{border-color:var(--rose);}
 .search-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);}
 .search-ico svg{width:16px;height:16px;fill:none;stroke:var(--ink3);stroke-width:1.8;stroke-linecap:round;}
-.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;
+.search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;
   background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);
   z-index:55;max-height:240px;overflow-y:auto;
   box-shadow:var(--sdw-lg);display:none;}
 .search-results.open{display:block;}
+.sr-item{padding:11px 16px;border-bottom:1px solid var(--bdr);cursor:pointer;
+  display:flex;align-items:center;gap:8px;transition:background var(--fast);}
+.sr-item:active{background:var(--bg2);}
+.sr-item:last-child{border-bottom:none;}
+.sr-cat{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--rose);flex-shrink:0;min-width:48px;}
+.sr-nm{font-size:13px;color:var(--ink);font-weight:500;}
 .search-result-item{padding:12px 16px;font-size:14px;cursor:pointer;
   border-bottom:1px solid var(--bdr);transition:background var(--fast);}
 .search-result-item:last-child{border-bottom:none;}
@@ -1401,6 +1411,11 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
       </button>
     </div>
   </div>
+  <div class="home-search" style="padding:0 var(--px) 4px;position:relative;">
+    <div class="search-ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--ink3)" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    <input class="search-inp" id="home-srch-inp" type="search" placeholder="Search guests, vendors, events…" oninput="runSearch(this.value)" autocomplete="off">
+    <div class="search-results" id="search-results"></div>
+  </div>
   <div class="scroll">
     <!-- Hero countdown -->
     <div class="hero-card" onclick="goTab('profile')">
@@ -1439,8 +1454,8 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
     </div>
     <div class="tgrid" id="tgrid"></div>
     <!-- Action cards row -->
-    <div style="padding:12px var(--px) 0;display:flex;gap:10px;">
-      <div class="linked-shortcut" style="flex:1;" onclick="openSh('share-access')">
+    <div style="margin:12px var(--px) 0;display:flex;gap:10px;">
+      <div class="linked-shortcut" style="flex:1;margin:0;" onclick="openSh('share-access')">
         <div class="linked-ico">
           <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         </div>
@@ -1449,7 +1464,7 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
           <div style="font-size:11px;color:var(--ink3);margin-top:1px;">Share your plan</div>
         </div>
       </div>
-      <div class="linked-shortcut" style="flex:1;" onclick="applyQuickStart()">
+      <div class="linked-shortcut" style="flex:1;margin:0;" onclick="applyQuickStart()">
         <div class="linked-ico" style="background:rgba(197,168,114,.12);">
           <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="var(--gold)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -2475,6 +2490,9 @@ const TOOLS=[
   {id:'vendors',  lbl:'Vendors',    bg:'#E9B2A6', ic:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>'},
   {id:'timeline', lbl:'Timeline',   bg:'#E9B2A6', ic:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>'},
   {id:'guests',   lbl:'Guests',     bg:'#D2C0BA', ic:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>'},
+  {id:'registry', lbl:'Registry',   bg:'#E8F0E8', ic:'<path d="M20 12v10H4V12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/>'},
+  {id:'shotlist', lbl:'Shot List',  bg:'#EBE4E0', ic:'<path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/>'},
+  {id:'export',   lbl:'Export',     bg:'#F2D9B8', ic:'<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>'},
   {id:'seating',  lbl:'Floor Plan', bg:'#F5DDBC', ic:'<circle cx="12" cy="12" r="7"/><circle cx="12" cy="3" r="1.5" fill="#232323" stroke="none"/><circle cx="12" cy="21" r="1.5" fill="#232323" stroke="none"/><circle cx="3" cy="12" r="1.5" fill="#232323" stroke="none"/><circle cx="21" cy="12" r="1.5" fill="#232323" stroke="none"/><circle cx="5.6" cy="5.6" r="1.5" fill="#232323" stroke="none"/><circle cx="18.4" cy="5.6" r="1.5" fill="#232323" stroke="none"/><circle cx="5.6" cy="18.4" r="1.5" fill="#232323" stroke="none"/><circle cx="18.4" cy="18.4" r="1.5" fill="#232323" stroke="none"/>'},
 ];
 
@@ -4363,10 +4381,10 @@ function applyQuickStart() {
   const qVendors = [
     {id:uid(),name:'TBD Photographer',type:'Photography',status:'Pending',price:'$3500',phone:'',email:'',notes:'Research 3+ photographers'},
     {id:uid(),name:'TBD Caterer',type:'Catering',status:'Pending',price:'$8000',phone:'',email:'',notes:'Budget ~$85/head'},
-    {id:uid(),name:'TBD Florist',type:'Florist',status:'Pending',price:'$2500',phone:'',email:'',notes:'Centrepieces + bridal bouquet'},
-    {id:uid(),name:'TBD DJ / Band',type:'Entertainment',status:'Pending',price:'$2000',phone:'',email:'',notes:'4-hour reception set'},
-    {id:uid(),name:'TBD Wedding Planner',type:'Planner',status:'Pending',price:'$3000',phone:'',email:'',notes:'Day-of coordination minimum'},
-    {id:uid(),name:'TBD Hair & Makeup',type:'Beauty',status:'Pending',price:'$1200',phone:'',email:'',notes:'Bridal + 2 bridesmaids'},
+    {id:uid(),name:'TBD Florist',type:'Florals',status:'Pending',price:'$2500',phone:'',email:'',notes:'Centrepieces + bridal bouquet'},
+    {id:uid(),name:'TBD DJ / Band',type:'Music / DJ',status:'Pending',price:'$2000',phone:'',email:'',notes:'4-hour reception set'},
+    {id:uid(),name:'TBD Wedding Planner',type:'Wedding Planner',status:'Pending',price:'$3000',phone:'',email:'',notes:'Day-of coordination minimum'},
+    {id:uid(),name:'TBD Hair & Makeup',type:'Hair & Makeup',status:'Pending',price:'$1200',phone:'',email:'',notes:'Bridal + 2 bridesmaids'},
     {id:uid(),name:'TBD Officiant',type:'Officiant',status:'Pending',price:'$500',phone:'',email:'',notes:'30-min ceremony'},
     {id:uid(),name:'TBD Videographer',type:'Videography',status:'Pending',price:'$2800',phone:'',email:'',notes:'Highlight reel + full ceremony'},
   ];
@@ -4450,7 +4468,7 @@ function applyQuickStart() {
 
   renderAll(); renderRegistry(); renderShotList(); calcBudget(); saveData();
   toast('Quick Start applied — your plan is ready!');
-  openScreen('home');
+  goTab('home');
 }
 
 // ══ INVITATIONS ══════════════════════════════════════════════════════
