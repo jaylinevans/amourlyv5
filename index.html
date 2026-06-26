@@ -474,6 +474,9 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   line-height:1;font-weight:400;}
 .hcd-lbl{font-size:10px;font-weight:600;letter-spacing:.12em;
   text-transform:uppercase;color:rgba(250,248,245,.4);margin-top:2px;}
+.hero-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;background:var(--rose-lt);font-size:17px;font-weight:700;
+  color:var(--rose);flex-shrink:0;overflow:hidden;}
 /* Budget strip */
 .bstrip{margin:10px var(--px) 0;background:var(--white);
   border-radius:var(--r-lg);border:1px solid var(--bdr);
@@ -499,7 +502,7 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   transition:transform var(--fast) var(--spring);box-shadow:var(--sdw);}
 .tic svg{width:26px;height:26px;fill:none;stroke:#1C1917;
   stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round;}
-.ti-lbl{font-size:12px;font-weight:600;color:var(--ink);text-align:center;}
+.ti-lbl,.til{font-size:12px;font-weight:600;color:var(--ink);text-align:center;}
 /* Linked shortcut */
 .linked-shortcut{margin:12px var(--px) 0;background:var(--white);
   border-radius:var(--r-lg);border:1px solid var(--bdr);
@@ -677,12 +680,12 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   position:relative;overflow:hidden;}
 .design-hero::before{content:'';position:absolute;inset:0;
   background:radial-gradient(ellipse at 80% 50%,rgba(200,131,106,.22) 0%,transparent 70%);}
-.dh-z{position:relative;z-index:1;}
-.dh-eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+.dh-z,.design-hero-content{position:relative;z-index:1;}
+.dh-eyebrow,.design-hero-eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;
   color:rgba(250,248,245,.38);font-weight:600;margin-bottom:5px;}
-.dh-title{font-family:var(--font-brand);font-size:26px;color:var(--bg);
+.dh-title,.design-hero-title{font-family:var(--font-brand);font-size:26px;color:var(--bg);
   letter-spacing:.01em;line-height:1.15;}
-.dh-sub{font-size:12px;color:rgba(250,248,245,.45);margin-top:4px;line-height:1.6;}
+.dh-sub,.design-hero-sub{font-size:12px;color:rgba(250,248,245,.45);margin-top:4px;line-height:1.6;}
 .design-section{padding:0 var(--px);}
 .design-sec-hdr{display:flex;justify-content:space-between;
   align-items:center;padding:20px 0 12px;min-height:54px;}
