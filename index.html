@@ -478,6 +478,17 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
 .hero-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;
   justify-content:center;background:var(--rose-lt);font-size:17px;font-weight:700;
   color:var(--rose);flex-shrink:0;overflow:hidden;}
+/* Hero v2 (white card) */
+.hero-card2{margin:4px var(--px) 0;background:var(--white);border-radius:var(--r-lg);
+  border:1px solid var(--bdr);padding:22px var(--px) 20px;text-align:center;
+  cursor:pointer;box-shadow:var(--sdw);-webkit-tap-highlight-color:transparent;}
+.hero2-heart{display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.hero2-couple{font-family:var(--font-brand);font-size:24px;color:var(--ink);line-height:1.1;margin-bottom:4px;}
+.hero2-by{font-size:12px;color:var(--ink3);margin-bottom:2px;}
+.hero2-sub{font-size:12px;color:var(--ink3);margin-bottom:14px;}
+.hero2-cdn{display:flex;align-items:baseline;justify-content:center;gap:8px;}
+.hero2-num{font-family:var(--font-brand);font-size:52px;color:var(--ink);line-height:1;font-weight:400;}
+.hero2-lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);}
 /* Budget strip */
 .bstrip{margin:10px var(--px) 0;background:var(--white);
   border-radius:var(--r-lg);border:1px solid var(--bdr);
@@ -1420,33 +1431,34 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   </div>
   <div class="scroll">
     <!-- Hero countdown -->
-    <div class="hero-card" onclick="goTab('profile')">
-      <div class="hero-left">
-        <div class="hero-eyebrow">Your Big Day</div>
-        <div class="hero-couple" id="h-couple-text">Your Wedding</div>
-        <div class="hero-venue" id="h-sub">Add your details →</div>
+    <div class="hero-card2" onclick="goTab('profile')">
+      <div class="hero2-heart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--rose)" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       </div>
-      <div class="hero-right" id="cdn-wrap">
-        <div class="hcd" id="hcd">–</div>
-        <div class="hcd-lbl" id="hcd-lbl">days to go</div>
+      <div class="hero2-couple" id="h-couple-text">Your Wedding</div>
+      <div class="hero2-by" id="h-planned-by"></div>
+      <div class="hero2-sub" id="h-sub">Add your details →</div>
+      <div class="hero2-cdn">
+        <span class="hero2-num" id="hcd">–</span>
+        <span class="hero2-lbl" id="hcd-lbl">DAYS TO GO</span>
       </div>
     </div>
-    <!-- Budget strip -->
+    <!-- Stats strip -->
     <div class="bstrip">
       <div class="bstrip-item">
-        <div class="bstrip-lbl">Budget</div>
-        <div class="bstrip-val" id="h-budget-total">$0</div>
-        <div class="bstrip-sub">total</div>
+        <div class="bstrip-lbl">Budget Left</div>
+        <div class="bstrip-val" id="h-budget-rem">–</div>
+        <div class="bstrip-sub" id="h-budget-pct">of total</div>
       </div>
       <div class="bstrip-item">
-        <div class="bstrip-lbl">Spent</div>
-        <div class="bstrip-val rose" id="h-budget-spent">$0</div>
-        <div class="bstrip-sub" id="h-budget-pct">0%</div>
+        <div class="bstrip-lbl">Confirmed</div>
+        <div class="bstrip-val" id="h-guests-conf">0</div>
+        <div class="bstrip-sub" id="h-guests-sub">guests</div>
       </div>
       <div class="bstrip-item">
-        <div class="bstrip-lbl">Guests</div>
-        <div class="bstrip-val" id="h-guests">0</div>
-        <div class="bstrip-sub" id="h-guests-conf">0 confirmed</div>
+        <div class="bstrip-lbl">Vendors Booked</div>
+        <div class="bstrip-val" id="h-vendors-booked">0</div>
+        <div class="bstrip-sub">booked</div>
       </div>
     </div>
     <!-- Tool grid -->
@@ -1476,10 +1488,13 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
         </div>
       </div>
     </div>
-    <!-- Up Next -->
+    <!-- To-do -->
     <div class="sh" style="padding-bottom:6px;">
-      <div class="sh-title">Up Next</div>
-      <button class="sh-add" onclick="openSh('add-todo')">+</button>
+      <div class="sh-title">To-do</div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="sh-add" onclick="openSh('add-todo')" style="width:28px;height:28px;font-size:18px;">+</button>
+        <button onclick="goTab('profile')" style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--rose);background:none;border:none;cursor:pointer;font-family:var(--font-ui);">See All</button>
+      </div>
     </div>
     <div class="home-todos" id="home-todos">
       <div class="empty-state" style="padding:20px var(--px);">
@@ -1488,7 +1503,7 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
     </div>
     <div style="height:20px;"></div>
   </div>
-  <nav class="nav"><div class="nt act" data-tab="home" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></div><div class="nt" data-tab="chat" onclick="goTab('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Amour AI</span></div><div class="nt" data-tab="design" onclick="goTab('design')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Design</span></div><div class="nt" data-tab="profile" onclick="goTab('profile')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg><span>Profile</span></div></nav>
+  <nav class="nav"><div class="nt" data-tab="chat" onclick="goTab('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Amour AI</span></div><div class="nt act" data-tab="home" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></div><div class="nt" data-tab="design" onclick="goTab('design')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Design</span></div><div class="nt" data-tab="profile" onclick="goTab('profile')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg><span>Profile</span></div></nav>
 </div>
 
 <!-- ══ CHAT / AMOUR AI ══ -->
@@ -1525,7 +1540,7 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
       <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
   </div>
-  <nav class="nav"><div class="nt" data-tab="home" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></div><div class="nt act" data-tab="chat" onclick="goTab('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Amour AI</span></div><div class="nt" data-tab="design" onclick="goTab('design')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Design</span></div><div class="nt" data-tab="profile" onclick="goTab('profile')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg><span>Profile</span></div></nav>
+  <nav class="nav"><div class="nt act" data-tab="chat" onclick="goTab('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Amour AI</span></div><div class="nt" data-tab="home" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></div><div class="nt" data-tab="design" onclick="goTab('design')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Design</span></div><div class="nt" data-tab="profile" onclick="goTab('profile')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg><span>Profile</span></div></nav>
 </div>
 
 <!-- ══ PROFILE ══ -->
@@ -1598,7 +1613,7 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
     </div>
     <div style="height:28px;"></div>
   </div>
-  <nav class="nav"><div class="nt" data-tab="home" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></div><div class="nt" data-tab="chat" onclick="goTab('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Amour AI</span></div><div class="nt" data-tab="design" onclick="goTab('design')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Design</span></div><div class="nt act" data-tab="profile" onclick="goTab('profile')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg><span>Profile</span></div></nav>
+  <nav class="nav"><div class="nt" data-tab="chat" onclick="goTab('chat')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Amour AI</span></div><div class="nt" data-tab="home" onclick="goTab('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Home</span></div><div class="nt" data-tab="design" onclick="goTab('design')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Design</span></div><div class="nt act" data-tab="profile" onclick="goTab('profile')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg><span>Profile</span></div></nav>
 </div>
 
 
@@ -1796,13 +1811,13 @@ select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.
   </div>
 
   <nav class="nav">
-    <div class="nt" data-tab="home" onclick="goTab('home')">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-      <span>Home</span>
-    </div>
     <div class="nt" data-tab="chat" onclick="goTab('chat')">
       <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
       <span>Amour AI</span>
+    </div>
+    <div class="nt" data-tab="home" onclick="goTab('home')">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      <span>Home</span>
     </div>
     <div class="nt act" data-tab="design" onclick="goTab('design')">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
@@ -2764,17 +2779,14 @@ function intBk(){if(iStep<=1){showScr('login');return;}iStep--;renderIntake();}
 
 // ══ REVIEW SCREEN ══
 function showReviewScreen(){
-  const rlogo=el('rev-logo');if(rlogo)rlogo.src=LOGO_SRC;
   set('rev-name',S.name||'you');
-  const card=el('rev-card');if(!card)return;
-  const rows=[
-    {lbl:'Couple',val:S.partner&&S.partner!=='Your partner'?S.name+' & '+S.partner:S.name},
-    {lbl:'Wedding date',val:S.month&&S.year?[S.day,S.month,S.year].filter(Boolean).join(' '):'Not set yet'},
-    {lbl:'City',val:S.location||'Not set'},
-    {lbl:'Budget',val:S.totalBudget?'$'+S.totalBudget.toLocaleString():'Not set'},
-    {lbl:'Journey stage',val:(()=>{const c=document.querySelector('#stage-chips .chip.on');return c?c.textContent:'Not selected';})()},
-  ];
-  card.innerHTML=rows.map(r=>`<div class="rev-row"><div style="flex:1;"><div class="rev-lbl">${esc(r.lbl)}</div><div class="rev-val">${esc(r.val)}</div></div><button class="rev-edit" onclick="goIntakeEdit()">Edit</button></div>`).join('');
+  const couple=S.partner&&S.partner!=='Your partner'?S.name+' & '+S.partner:S.name;
+  const dateVal=S.month&&S.year?[S.day,S.month,S.year].filter(Boolean).join(' '):'Not set yet';
+  set('rev-couple',couple);
+  set('rev-date-card',dateVal);
+  set('rev-date',dateVal);
+  set('rev-location',S.location||'Not set');
+  set('rev-budget',S.totalBudget?'$'+S.totalBudget.toLocaleString():'Not set');
   showScr('review');
 }
 
@@ -2885,7 +2897,8 @@ function updateHeroAvatars(){
 function updateUI(){
   const n=S.name||'You',p=S.partner||'Your partner';
   const couple=n+' & '+p;
-  set('h-couple-text',couple);set('h-sub','Planned by '+n);
+  set('h-couple-text',couple);set('h-sub',S.month||S.year?[S.day,S.month,S.year].filter(Boolean).join(' '):'Add your details →');
+  set('h-planned-by',S.name?'Planned by '+S.name:'');
   if(S.avatarSrc){const pav=el('pav');if(pav)pav.innerHTML=`<img src="${S.avatarSrc}"><div class="pav-edit">Edit</div>`;}
   else{const pt=el('pav-txt');if(pt)pt.textContent=(n[0]||'?').toUpperCase();}
   set('pnm',couple);
@@ -2905,8 +2918,8 @@ function updateUI(){
   set('pr-budget',S.totalBudget?'$'+S.totalBudget.toLocaleString():'Not set');
   set('pr-guests',guests.length+' guests');
   const vcl=el('venue-city-lbl');if(vcl)vcl.textContent=S.location||'your city';
-  set('h-guests',guests.length);
-  set('h-guests-conf',guests.filter(g=>g.rsvp==='yes').length+' confirmed');
+  set('h-guests-conf',guests.filter(g=>g.rsvp==='yes').length);
+  set('h-vendors-booked',vendors.filter(v=>v.status==='Booked').length);
   calcBudget();
   if(S.avatarSrc)updateHeroAvatars();
   const aks=el('api-key-status');if(aks)aks.textContent=getApiKey()?'Active':'Not set';
@@ -2966,9 +2979,9 @@ function calcBudget(){
   const allSpent=budgetEvents.reduce((a,e)=>a+e.items.reduce((s,i)=>s+i.amount,0),0)+allBookedCost;
   const totalBudget=budgetEvents.reduce((a,e)=>a+e.budget,0)||(S.totalBudget||0);
   const allPct=totalBudget?Math.min(100,Math.round(allSpent/totalBudget*100)):0;
-  set('h-budget-total',totalBudget?'$'+totalBudget.toLocaleString():'$0');
-  set('h-budget-spent','$'+allSpent.toLocaleString());
-  set('h-budget-pct',allPct+'%');
+  const allRem=totalBudget-allSpent;
+  set('h-budget-rem',totalBudget?'$'+Math.max(0,allRem).toLocaleString():'–');
+  set('h-budget-pct',totalBudget?allPct+'% spent':'of total');
 }
 function renderBudget(){
   const ev=getBEv();if(!ev){
@@ -2980,9 +2993,9 @@ function renderBudget(){
   let linked='';
   if(activeBudgetEvent==='wedding'){
     const bk=vendors.filter(v=>v.status==='Booked');
-    if(bk.length)linked=`<div style="padding:6px 0 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);">Auto-linked · Booked Vendors</div>`+bk.map(v=>`<div class="birow" style="border-left:3px solid var(--blush);"><div style="flex:1;"><div class="bicat">${esc(v.name)}</div><div class="binote">${esc(v.type)}</div></div><div style="font-size:13px;font-weight:600;color:var(--ink);">${esc(v.price)}</div></div>`).join('');
+    if(bk.length)linked=`<div style="padding:8px 0 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);">Auto-linked · Booked Vendors</div>`+bk.map(v=>`<div class="birow" style="border-left:3px solid var(--blush);"><div style="flex:1;"><div class="biname">${esc(v.name)}</div><div class="bitype">${esc(v.type)}</div></div><div style="font-size:14px;font-weight:700;color:var(--ink);">${esc(v.price)}</div></div>`).join('');
   }
-  const manual=ev.items.map((b,i)=>`<div class="birow"><div style="width:8px;height:8px;border-radius:50%;background:${BCOLS[i%BCOLS.length]};flex-shrink:0;"></div><div style="flex:1;"><div class="bicat">${esc(b.cat)}</div>${b.note?`<div class="binote">${esc(b.note)}</div>`:''}</div><div style="font-size:13px;font-weight:600;color:var(--ink);">$${b.amount.toLocaleString()}</div><button class="rmv" onclick="getBEv().items.splice(${i},1);renderBudget();saveData();toast('Removed');">−</button></div>`).join('');
+  const manual=ev.items.map((b,i)=>`<div class="birow"><div style="width:8px;height:8px;border-radius:50%;background:${BCOLS[i%BCOLS.length]};flex-shrink:0;margin-right:2px;"></div><div style="flex:1;"><div class="biname">${esc(b.label||b.cat)}</div><div class="bitype">${esc(b.cat)}</div></div><div style="font-size:14px;font-weight:700;color:var(--ink);">$${b.amount.toLocaleString()}</div><button class="rmv" onclick="getBEv().items.splice(${i},1);renderBudget();saveData();toast('Removed');">−</button></div>`).join('');
   e.innerHTML=linked+manual||(linked?'':'<div style="padding:24px;text-align:center;font-size:13px;color:var(--ink3);">No expenses yet. Tap + Add.</div>');
   calcBudget();
 }
@@ -3016,8 +3029,7 @@ function renderGuests(filter){
   }).join(''):`<div style="padding:24px;text-align:center;font-size:13px;color:var(--ink3);">${q?'No matches.':'No guests yet. Tap + Add.'}</div>`;
   const conf=guests.filter(g=>g.rsvp==='yes').length;
   set('pr-guests',guests.length+' guests');
-  set('h-guests',guests.length);
-  set('h-guests-conf',conf+' confirmed');
+  set('h-guests-conf',conf);
 }
 function filterGuests(q){renderGuests(q);}
 function populateGuestSide(){
